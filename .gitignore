@@ -1,0 +1,33 @@
+# Ignore Node & Bower
+node_modules
+bower_components
+build
+.tmp
+
+# Ignore Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Ignore mongo db
+*.lock
+*.0
+*.1
+*.ns
+journal
+
+# Ignore Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.xap
+*.zip
+
+# Logs and databases #
+*.log
+*.mdf
+*.ldf
