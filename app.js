@@ -12,23 +12,23 @@ var server = http.createServer(function (req, res) {
     var body = '';
 
     req.on('data', function(chunk) {
-        body += chunk;
+      body += chunk;
     });
 
     req.on('end', function() {
-        if (req.url === '/') {
-          log('Received message: ' + body);
-        } else if (req.url = '/scheduled') {
-          log('Received task ' + req.headers['x-aws-sqsd-taskname'] + ' scheduled at ' + req.headers['x-aws-sqsd-scheduled-at']);
-        }
+      if (req.url === '/') {
+        log('Received message: ' + body);
+      } else if (req.url = '/scheduled') {
+        log('Received task ' + req.headers['x-aws-sqsd-taskname'] + ' scheduled at ' + req.headers['x-aws-sqsd-scheduled-at']);
+      }
 
-        res.writeHead(200, 'OK', {'Content-Type': 'text/plain'});
-        res.end();
+      res.writeHead(200, 'OK', {'Content-Type': 'text/plain'});
+      res.end();
     });
   } else {
-        res.writeHead(200);
-        res.write(html);
-        res.end();
+    res.writeHead(200);
+    res.write(html);
+    res.end();
   }
 });
 
