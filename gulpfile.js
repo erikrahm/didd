@@ -1,7 +1,6 @@
 // gulpfile.js
 var gulp        = require('gulp');
-var gutil       = require('gulp-util');
-var gsass       = require('gulp-sass');
+var $           = require('gulp-load-plugins')({lazy:true});
 var source      = require('vinyl-source-stream');
 var babelify    = require('babelify');
 var watchify    = require('watchify');
@@ -30,13 +29,13 @@ gulp.task('sass-watcher', [], function() {
 });
 
 gulp.task('sass', [], function() {
-  gutil.log('Compiling Sass to CSS');
+  $.util.log('Compiling Sass to CSS');
   
   return gulp
     .src(config.sass + 'config.scss')
       //.pipe($.plumber())
-      .pipe(gsass().on('error', gsass.logError))
-      .pipe(gsass({outputStyle: 'expanded'}))
+      .pipe($.sass().on('error', $.sass.logError))
+      .pipe($.sass({outputStyle: 'expanded'}))
       //.pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
       .pipe(gulp.dest(config.css));
 });
@@ -53,12 +52,12 @@ bundler.on('update', bundle);
 // The function that bundles
 function bundle() {
 
-  gutil.log('Bundling dat shittttt...');
+  $.util.log('Bundling dat shittttt...');
 
   return bundler.bundle()
     .on('error', function (err) {
-      gutil.log('Oh shit waddup');
-      gutil.log(err.message);
+      $.util.log('Oh shit waddup');
+      $.util.log(err.message);
       this.emit("end");
     })
     .pipe(source('bundle.js'))
