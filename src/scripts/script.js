@@ -2,10 +2,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-// script.js
-var React = require('react');
-var ReactDOM = require('react-dom');
-
 // Holy crap, React!
 ReactDOM.render(
   <h1>Hello, world!</h1>,
