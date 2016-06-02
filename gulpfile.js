@@ -42,7 +42,7 @@ gulp.task('sass', [], function() {
 });
 
 // dat bundler
-var bundler = watchify(browserify('./src/scripts/script.js', watchify.args));
+var bundler = watchify(browserify(config.client + 'scripts/script.js', watchify.args));
 
 bundler.transform(babelify.configure({
   presets: ["es2015", "react"]
