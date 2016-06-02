@@ -42,13 +42,13 @@ gulp.task('sass', [], function() {
       .pipe(gulp.dest(config.cssTemp));
 });
 
-gulp.task('inject', ['styles'], function() {
-  log('Wire up the app css into index html and call wiredep');
+gulp.task('inject', ['sass'], function() {
+  $.util.log('Wire up the app css into index html and call wiredep');
   
   return gulp
-    .src(config.index)
-    .pipe($.inject(gulp.src(config.css)))
-    .pipe(gulp.dest(config.client));
+    .src('index.html')
+    .pipe($.inject(gulp.src(config.cssTemp)))
+    .pipe(gulp.dest(config.css));
 });
 
 // dat bundler
