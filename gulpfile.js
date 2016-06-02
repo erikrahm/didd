@@ -33,10 +33,10 @@ gulp.task('sass', [], function() {
   
   return gulp
     .src(config.sass + 'config.scss')
-      //.pipe($.plumber())
+      .pipe($.plumber())
       .pipe($.sass().on('error', $.sass.logError))
       .pipe($.sass({outputStyle: 'expanded'}))
-      //.pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
+      .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
       .pipe(gulp.dest(config.css));
 });
 
