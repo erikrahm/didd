@@ -13,7 +13,7 @@ watchify.args.debug = true;
 var client = './src/client/';
 var server = './src/server/';
 var dist = './dist/';
-var temp = '.temp';
+var temp = './.tmp/';
 
 var config = {
   client: client,
@@ -21,7 +21,9 @@ var config = {
   build: dist,
   temp: temp,
   sass: client + 'sass/',
-  css: dist + 'css/'
+  css: dist + 'css/',
+  cssTemp: temp,
+  index: client + 'index.html'
 };
 
 gulp.task('sass-watcher', [], function() {
@@ -32,12 +34,21 @@ gulp.task('sass', [], function() {
   $.util.log('Compiling Sass to CSS');
   
   return gulp
-    .src(config.sass + 'config.scss')
+    .src(config.sass + 'app.scss')
       .pipe($.plumber())
       .pipe($.sass().on('error', $.sass.logError))
       .pipe($.sass({outputStyle: 'expanded'}))
       .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
-      .pipe(gulp.dest(config.css));
+      .pipe(gulp.dest(config.cssTemp));
+});
+
+gulp.task('inject', ['styles'], function() {
+  log('Wire up the app css into index html and call wiredep');
+  
+  return gulp
+    .src(config.index)
+    .pipe($.inject(gulp.src(config.css)))
+    .pipe(gulp.dest(config.client));
 });
 
 // dat bundler
